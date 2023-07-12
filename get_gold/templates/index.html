@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Money</title>
+</head>
+<body>
+    <div>
+        <p>Your Gold: {{ request.session.gold }}</p>
+    </div>
+    <div>
+        <div>
+            <h4>Farm</h4>
+            <p>(earns 10-20 gold)</p>
+            <form action="/process_money" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="get_gold" value="farm">
+                <button class="" type='submit'>Find Gold!</button>
+            </form>
+        </div>
+        <div>
+            <h4>Cave</h4>
+            <p>(earns 5-10 gold)</p>
+            <form action="/process_money" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="get_gold" value="cave">
+                <button class="" type='submit'>Find Gold!</button>
+            </form>
+        </div>
+        <div>
+            <h4>House</h4>
+            <p>(earns 2-5 gold)</p>
+            <form action="/process_money" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="get_gold" value="house">
+                <button class="" type='submit'>Find Gold!</button>
+            </form>
+        </div>
+        <div>
+            <h4>Casino</h4>
+            <p>(earns/takes 0-50 gold)</p>
+            <form action="/process_money" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="get_gold" value="casino">
+                <button class="" type='submit'>Find Gold!</button>
+            </form>
+        </div>
+    </div>
+    <div>
+        <p>Activities:</p>
+        <div>
+            {% for one_message in request.session.message %}
+            <p>{{ one_message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <a href="/reset">Reset</a>
+</body>
+</html>
